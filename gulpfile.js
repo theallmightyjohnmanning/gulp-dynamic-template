@@ -92,7 +92,7 @@ gulp.task('minify-js', function() {
 gulp.task('watch', function() {
 	livereload.listen();
 
-	gulp.watch(path.join(config.app., 'public/js/*.js'), ['minify-js']);
+	gulp.watch(path.join(config.app.root, 'public/js/*.js'), ['minify-js']);
 	for(i = 0; i < Object.keys(config.gulp.watched.js).length; i++) {
 
 		fs.readdirSync(path.join(config.app.root, 'public/js/'+config.gulp.watched.js[i])).forEach(function(filename) {
