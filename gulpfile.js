@@ -1,14 +1,14 @@
 // Included Modules
 var fs 		 	  = require('fs'),
-	path 		    = require('path'),
-	gulp 		    = require('gulp'),
-	gutil 		  = require('gulp-util'),
-	sass 		    = require('gulp-sass'),
-	jshint 		  = require('gulp-jshint'),
-	uglify		  = require('gulp-uglify'),
-	rename 	    = require('gulp-rename'),
-	plumber 	  = require('gulp-plumber'),
-	livereload 	= require('gulp-livereload');
+		path 		    = require('path'),
+		gulp 		    = require('gulp'),
+		gutil 		  = require('gulp-util'),
+		sass 		    = require('gulp-sass'),
+		jshint 		  = require('gulp-jshint'),
+		uglify		  = require('gulp-uglify'),
+		rename 	    = require('gulp-rename'),
+		plumber 	  = require('gulp-plumber'),
+		livereload 	= require('gulp-livereload');
 
 // Pull In The Config File
 var config 		= JSON.parse(fs.readFileSync('config.json'));
