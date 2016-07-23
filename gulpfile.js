@@ -19,9 +19,9 @@ gulp.task('compile-sass', function () {
 	// Itterate Through Directories Listed In Config File & Compile SCSS Files Held Within Them
 	for(i = 0; i < Object.keys(config.gulp.watched.css).length; i++) {
 
-		return gulp.src(path.join(__dirname,  'public/'+config.gulp.watched.css[i]+'*.scss'))
+		return gulp.src(path.join(config.app.root,  'public/'+config.gulp.watched.css[i]+'*.scss'))
 				.pipe(sass().on('error', sass.logError))
-				.pipe(gulp.dest(path.join(__dirname, 'public/'+config.gulp.watched.css[i])))
+				.pipe(gulp.dest(path.join(config.app.root, 'public/'+config.gulp.watched.css[i])))
 				.pipe(livereload());
 	}
 });
@@ -32,7 +32,7 @@ gulp.task('compile-sass', function () {
 gulp.task('minify-js', function() {
 
 	// Loop throught the directory and return the filename of each file held within
-		fs.readdirSync(path.join(__dirname, 'public/js/')).forEach(function(filename) {
+		fs.readdirSync(path.join(config.app.root, 'public/js/')).forEach(function(filename) {
 
 			// Check If The File Has The Js Extension
 			if(~filename.indexOf('.js')) {
@@ -42,7 +42,7 @@ gulp.task('minify-js', function() {
 					return val;
 				});
 
-				gulp.src(path.join(__dirname, 'public/js/*.js'))
+				gulp.src(path.join(config.app.root, 'public/js/*.js'))
 					.pipe(plumber())
 					.pipe(jshint())
     					.pipe(jshint.reporter('jshint-stylish'))
@@ -51,7 +51,7 @@ gulp.task('minify-js', function() {
 						basename: name[0],
 						extname: '.min.js'
 					}))
-					.pipe(gulp.dest(path.join(__dirname, 'public/js/dist/')))
+					.pipe(gulp.dest(path.join(config.app.root, 'public/js/dist/')))
 					.pipe(livereload());
 			}
 		});
@@ -60,7 +60,7 @@ gulp.task('minify-js', function() {
 	for(i = 0; i < Object.keys(config.gulp.watched.js).length; i++) {
 
 		// Loop throught the directory and return the filename of each file held within
-		fs.readdirSync(path.join(__dirname, 'public/js/'+config.gulp.watched.js[i])).forEach(function(filename) {
+		fs.readdirSync(path.join(config.app.root, 'public/js/'+config.gulp.watched.js[i])).forEach(function(filename) {
 
 			// Check If The File Has The Js Extension
 			if(~filename.indexOf('.js')) {
@@ -70,7 +70,7 @@ gulp.task('minify-js', function() {
 					return val;
 				});
 
-				gulp.src(path.join(__dirname, 'public/js/'+config.gulp.watched.js[i]+filename))
+				gulp.src(path.join(config.app.root, 'public/js/'+config.gulp.watched.js[i]+filename))
 					.pipe(plumber())
 					.pipe(jshint())
     					.pipe(jshint.reporter('jshint-stylish'))
@@ -79,7 +79,7 @@ gulp.task('minify-js', function() {
 						basename: name[0],
 						extname: '.min.js'
 					}))
-					.pipe(gulp.dest(path.join(__dirname, 'public/js/dist/'+config.gulp.watched.js[i])))
+					.pipe(gulp.dest(path.join(config.app.root, 'public/js/dist/'+config.gulp.watched.js[i])))
 					.pipe(livereload());
 			}
 		});
@@ -92,21 +92,21 @@ gulp.task('minify-js', function() {
 gulp.task('watch', function() {
 	livereload.listen();
 
-	gulp.watch(path.join(__dirname, 'public/js/*.js'), ['minify-js']);
+	gulp.watch(path.join(config.app., 'public/js/*.js'), ['minify-js']);
 	for(i = 0; i < Object.keys(config.gulp.watched.js).length; i++) {
 
-		fs.readdirSync(path.join(__dirname, 'public/js/'+config.gulp.watched.js[i])).forEach(function(filename) {
+		fs.readdirSync(path.join(config.app.root, 'public/js/'+config.gulp.watched.js[i])).forEach(function(filename) {
 
-			gulp.watch(path.join(__dirname, 'public/js/'+config.gulp.watched.js[i]+'*.js'), ['minify-js']);
+			gulp.watch(path.join(config.app.root, 'public/js/'+config.gulp.watched.js[i]+'*.js'), ['minify-js']);
 		});
 	}
 
-	gulp.watch(path.join(__dirname, 'public/css/*.scss'), ['compile-sass']);
+	gulp.watch(path.join(config.app.root, 'public/css/*.scss'), ['compile-sass']);
 	for(i = 0; i < Object.keys(config.gulp.watched.js).length; i++) {
 
-		fs.readdirSync(path.join(__dirname, 'public/'+config.gulp.watched.css[i])).forEach(function(filename) {
+		fs.readdirSync(path.join(config.app.root, 'public/'+config.gulp.watched.css[i])).forEach(function(filename) {
 
-			gulp.watch(path.join(__dirname, 'public/'+config.gulp.watched.css[i]+'*.scss'), ['compile-sass']);
+			gulp.watch(path.join(config.app.root, 'public/'+config.gulp.watched.css[i]+'*.scss'), ['compile-sass']);
 		});
 	}
 });

@@ -1,4 +1,7 @@
 {
+	"app": {
+		"root": "/home/john/devel/js/raiden/"
+	},
 	"gulp": {
 		"watched": {
 			"css": [
